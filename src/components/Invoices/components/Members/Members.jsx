@@ -1,16 +1,12 @@
-import React, { useEffect, useContext, useState, Suspense } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import { asyncDispatch } from "../../../../state/asyncDispatch";
 import { AppContext } from "../../../../state/AppContext";
 import { ActionType } from "../../../../state/actions";
 import { getUsers } from "../../../../state/controllers/usersController";
-import { UserInfoSceleton } from "./components/UserInfoSceleton";
-const UserInfo = React.lazy(() => import("./components/UserInfo"));
+import { MemberItemSceleton } from "./components/MemberItemSceleton";
+const MemberItem = React.lazy(() => import("./components/MemberItem"));
 
 export const Members = () => {
-  const [{ isTrue, id }, setGetInfo] = useState({
-    isTrue: false,
-    id: null,
-  });
   const [{ users }, dispatch] = useContext(AppContext);
 
   useEffect(() => {
@@ -20,26 +16,9 @@ export const Members = () => {
   return (
     <>
       <h2 className="pb-5 pt-2">Members list: </h2>
-      {users.map((user) => {
-        return (
-          <div key={user.id} className="flex flex-col">
-            <div className="flex justify-between">
-              <p>{user.name}</p>
-              <button
-                onClick={() => setGetInfo({ isTrue: !isTrue, id: user.id })}
-              >
-                {isTrue && id === user.id ? "x" : isTrue ? null : "info"}
-              </button>
-            </div>
-
-            {isTrue && id === user.id ? (
-              <Suspense fallback={<UserInfoSceleton /> } >
-                <UserInfo user={user} />
-              </Suspense>
-            ) : null}
-          </div>
-        );
-      })}
+      <Suspense fallback={<MemberItemSceleton users={users} />}>
+        <MemberItem users={users} />
+      </Suspense>
     </>
   );
 };
