@@ -1,0 +1,9 @@
+{
+  "extends": ["react-app", "react-app/jest"],
+  "rules": {
+    // "no-unused-vars": "off",
+    // "no-console": "warn",
+    // "quotes": ["warn", "double"],
+    // "indent": ["warn", 2]
+  }
+}
