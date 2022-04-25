@@ -3,7 +3,9 @@ import React from "react";
 export const Home = () => {
 
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.log('hello');
+  };
 
   return (
     <div>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { MemberInfo } from "./MemberInfo";
+import { MemberInfo } from "../MemberInfo/MemberInfo";
 
-export default function MemberItem({ users }) {
+export default function MemberItem({ users = [] }) {
   const [{ isTrue, id }, setGetInfo] = useState({
     isTrue: false,
     id: null,
   });
 
+  if (!users.length) return null;
   return (
     <>
       {users.map((user) => {
@@ -27,4 +28,4 @@ export default function MemberItem({ users }) {
       })}
     </>
   );
-};
+}
