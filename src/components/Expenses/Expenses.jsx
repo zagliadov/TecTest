@@ -1,30 +1,32 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { Search } from "./components/Search/Search";
 
-export const sum = (a, b) => {
-  return a + b;
-};
+const getUser = () => Promise.resolve({id: 1, name: "Daniil"})
 export const Expenses = () => {
-  const [data, setData] = useState(false);
+  const [search, setSearch] = useState("");
+  const [user, setUser] = useState("");
 
-  const handleClick = () => {
-    setData(!data);
-    console.log(data)
-  }
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await getUser();
+      setUser(user);
+    };
+    loadUser();
+  }, [])
+
+  const handleSearch = ({ target }) => {
+    setSearch(target.value);
+  };
+
   return (
     <div className="flex flex-col">
       <h2 className="text-center py-4">Expenses:</h2>
-
-      <div role="tablist" className="flex flex-col">
-        <button role="tab" onClick={() => handleClick()} aria-selected="true">
-          Native
-        </button>
-        <button role="tab" aria-selected="false">
-          React
-        </button>
-        <button role="tab" aria-selected="false">
-          Cypress
-        </button>
-      </div>
+      {user && <h2>Logged in as { user.name }</h2>}
+      <Search value={search} onChange={handleSearch}>
+        Search: 
+      </Search>
+      <p>Searches for {search ? search : "..."}</p>
     </div>
   );
 };

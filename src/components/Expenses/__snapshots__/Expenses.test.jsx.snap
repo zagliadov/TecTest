@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expenses component Expenses render 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col"
+  >
+    <h2
+      class="text-center py-4"
+    >
+      Expenses:
+    </h2>
+    <h2>
+      Logged in as Daniil
+    </h2>
+    <div>
+      <img
+        alt="search images"
+        src=""
+      />
+      <label
+        for="search"
+      >
+        Search:
+      </label>
+      <input
+        id="search"
+        placeholder="search text..."
+        type="text"
+        value=""
+      />
+    </div>
+    <p>
+      Searches for ...
+    </p>
+  </div>
+</DocumentFragment>
+`;
