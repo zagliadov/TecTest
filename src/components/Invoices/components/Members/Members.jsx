@@ -14,7 +14,7 @@ export const Members = () => {
   useEffect(() => {
     asyncDispatch(dispatch, ActionType.GET_USERS, getUsers());
   }, [dispatch]);
-
+  if( users === undefined) return null
   if (!users.length) return null;
   return (
     <>
