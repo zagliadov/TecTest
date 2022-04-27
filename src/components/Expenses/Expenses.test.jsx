@@ -22,7 +22,8 @@ describe("events", () => {
     // eslint-disable-next-line testing-library/no-node-access
     const checkbox = container.firstChild;
     expect(checkbox).not.toBeChecked();
-    fireEvent.click(checkbox);
+    userEvent.click(checkbox); //Клик по checkbox
+    userEvent.click(checkbox, { ctrlKey: true, shiftKey: true}); //Проверяем были ли нажаты соответсвующие кнопки
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(checkbox).toBeChecked();
   });
