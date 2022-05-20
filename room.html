@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div
+      id="video"
+      style="max-width: 100vw; max-height: 100vh; aspect-ratio: 16/9;"
+    ></div>
+
+    <script>
+      async function connect() {
+
+        // Get an authentication token (This is for demo purposes only. Not for production use!)
+        const reply = await axios.post(
+          "https://guides.swrooms.com/public/video_token",
+          {
+            user_name: "user",
+            room_name: "room"
+          }
+        );
+        // Configuration
+        const roomSession = new SignalWire.Video.RoomSession({
+          rootElement: document.getElementById("video"),
+          token: reply.data.token
+        });
+        // Join the room
+        await roomSession.join();
+        axios.post('/api/token', (req, res) => {
+          res.json('room');
+        })
+
+        
+      }
+
+      connect();
+    </script>
+    <script src="https://unpkg.com/@signalwire/js"></script>
+
+  </body>
